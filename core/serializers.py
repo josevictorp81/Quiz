@@ -5,4 +5,11 @@ from .models import Question, Quizzes, Answer, Category
 class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quizzes
-        fields = ['title',]
+        fields = ['title']
+
+class RandomQuestionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+    
+        model = Question
+        fields = ['title', 'answer']
