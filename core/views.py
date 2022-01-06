@@ -8,7 +8,17 @@ from .serializers import QuizSerializer, RandomQuestionSerializer, QuestionSeria
 class Category(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    
+
+
+class QuizCategory(generics.ListAPIView):
+    queryset = Quizzes.objects.all()
+    serializer_class = QuizSerializer
+
+    def get(self, request, format=None, *args, **kwargs):
+        queryset = self.queryset.filter(category__name=kwargs['topic'])
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+
 
 class Quiz(generics.ListAPIView):
     queryset = Quizzes.objects.all()

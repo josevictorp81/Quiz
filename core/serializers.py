@@ -11,7 +11,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quizzes
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -34,4 +34,4 @@ class QuestionSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Question
-        fields = ['quiz', 'title', 'answer']
+        fields = ['id', 'quiz', 'title', 'answer']
