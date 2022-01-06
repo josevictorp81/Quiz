@@ -11,7 +11,7 @@ class Category(generics.ListCreateAPIView):
     serializer_class = CategorySerializer
 
 
-class Quiz(generics.ListAPIView):
+class Quiz(generics.ListCreateAPIView):
     queryset = Quizzes.objects.all()
     serializer_class = QuizSerializer
     filter_backends = [DjangoFilterBackend]
