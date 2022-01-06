@@ -3,7 +3,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import Question, Quizzes, Answer, Category
-from .serializers import QuizSerializer, RandomQuestionSerializer, QuestionSerializer
+from .serializers import QuizSerializer, RandomQuestionSerializer, QuestionSerializer, CategorySerializer
+
+class Category(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    
 
 class Quiz(generics.ListAPIView):
     queryset = Quizzes.objects.all()

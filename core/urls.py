@@ -3,7 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.Quiz.as_view(), name='quiz'),
-    path('<str:topic>/', views.Question.as_view(), name='question'),
-    path('<str:topic>/random/', views.RandomQuestion.as_view(), name='random'),
+    path('category/', views.Category.as_view(), name='category'),
+    path('quiz/', views.Quiz.as_view(), name='quiz'),
+    path('quiz/<str:topic>/', views.Question.as_view(), name='question'),
+    path('quiz/<str:topic>/random/', views.RandomQuestion.as_view(), name='random'),
 ]
