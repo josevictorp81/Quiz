@@ -12,11 +12,12 @@ class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quizzes
         fields = ['id', 'title', 'category']
+        
 
-class CreateQuestionSerializer(serializers.ModelSerializer):
+class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ['quiz', 'title']
+        fields = ['id', 'quiz', 'title']
 
 
 class AnswerSerializer(serializers.ModelSerializer):

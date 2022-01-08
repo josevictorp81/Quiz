@@ -4,7 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
 
 from .models import Question, Quizzes, Answer, Category
-from .serializers import QuizSerializer, RandomQuestionSerializer, ListQuestionSerializer, CategorySerializer, CreateQuestionSerializer
+from .serializers import QuizSerializer, RandomQuestionSerializer, ListQuestionSerializer, CategorySerializer, QuestionSerializer
 
 class ListCreateCategory(generics.ListCreateAPIView):
     queryset = Category.objects.all()
@@ -25,7 +25,7 @@ class RetrieveUpdateDestroyQuiz(generics.RetrieveUpdateDestroyAPIView):
 
 class CreateQuestion(generics.CreateAPIView):
     queryset = Question.objects.all()
-    serializer_class = CreateQuestionSerializer
+    serializer_class = QuestionSerializer
 
 
 class ListQuestion(generics.ListAPIView):
@@ -36,6 +36,10 @@ class ListQuestion(generics.ListAPIView):
         queryset = self.queryset.filter(quiz__title=kwargs['topic'])
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
+
+class RetrieveUpdateDestroyQuestion(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
 
 
 class ListRandomQuestion(generics.ListAPIView):
