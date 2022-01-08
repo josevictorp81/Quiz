@@ -11,7 +11,7 @@ class Category(models.Model):
 
 class Quizzes(models.Model):
     title = models.CharField(max_length=255, default='New Quiz', verbose_name='Quiz Title')
-    category = models.ForeignKey(Category, default=1, on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, default=1, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -36,7 +36,7 @@ class Question(models.Model):
         (0, 'Multiple Choice'),
     )
 
-    quiz = models.ForeignKey(Quizzes, related_name='question', on_delete=models.DO_NOTHING)
+    quiz = models.ForeignKey(Quizzes, related_name='question', on_delete=models.CASCADE)
     technique = models.IntegerField(choices=TYPE, default=0, verbose_name='Type of Question')
     title = models.CharField(max_length=255, verbose_name='Title')
     difficulty = models.IntegerField(choices=SCALE, default=0, verbose_name='Difficulty')
@@ -54,7 +54,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, related_name='answer', on_delete=models.DO_NOTHING)
+    question = models.ForeignKey(Question, related_name='answer', on_delete=models.CASCADE)
     answer_text = models.CharField(max_length=255, verbose_name='Answer Text')
     is_right = models.BooleanField(default=False)
     updated = models.DateTimeField(verbose_name='Last Updated', auto_now=True)

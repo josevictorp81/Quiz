@@ -6,16 +6,21 @@ from rest_framework.filters import SearchFilter
 from .models import Question, Quizzes, Answer, Category
 from .serializers import QuizSerializer, RandomQuestionSerializer, QuestionSerializer, CategorySerializer
 
-class Category(generics.ListCreateAPIView):
+class ListCreateCategory(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
 
-class Quiz(generics.ListCreateAPIView):
+class ListCreateQuiz(generics.ListCreateAPIView):
     queryset = Quizzes.objects.all()
     serializer_class = QuizSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['category__name', 'title']
+
+
+class RetrieveUpdateDestroyQuiz(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Quizzes.objects.all()
+    serializer_class = QuizSerializer
 
 
 class RandomQuestion(generics.ListAPIView):
