@@ -10,4 +10,6 @@ urlpatterns = [
     path('quiz/question/<int:pk>/', views.RetrieveUpdateDestroyQuestion.as_view(), name='update-destroy-question'),
     path('quiz/<str:topic>/question/', views.ListQuestion.as_view(), name='list-question'),
     path('quiz/<str:topic>/question/random/', views.ListRandomQuestion.as_view(), name='list-random-question'),
+    path('answer/', views.ListCreateAnswer.as_view(), name='list-create-answer'),
+    path('answer/<int:pk>/', views.RetieveUpdateDestroyAnswer.as_view(), name='update-destroy-answer'),
 ]
