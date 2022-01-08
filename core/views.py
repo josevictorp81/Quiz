@@ -1,7 +1,6 @@
 from rest_framework import generics
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter
 
 from .models import Question, Quizzes, Answer, Category
 from .serializers import QuizSerializer, RandomQuestionSerializer, ListQuestionSerializer, CategorySerializer, QuestionSerializer, AnswerSerializer
