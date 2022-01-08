@@ -13,6 +13,11 @@ class QuizSerializer(serializers.ModelSerializer):
         model = Quizzes
         fields = ['id', 'title', 'category']
 
+class CreateQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ['quiz', 'title']
+
 
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,7 +33,7 @@ class RandomQuestionSerializer(serializers.ModelSerializer):
         fields = ['title', 'answer']
 
 
-class QuestionSerializer(serializers.ModelSerializer):
+class ListQuestionSerializer(serializers.ModelSerializer):
     answer = AnswerSerializer(many=True, read_only=True)
     quiz = QuizSerializer(read_only=True)
     
