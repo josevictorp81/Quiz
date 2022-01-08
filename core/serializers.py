@@ -9,15 +9,17 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class QuizSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+    
     class Meta:
         model = Quizzes
         fields = ['id', 'title', 'category']
 
 
-class QuestionSerializer(serializers.ModelSerializer):
+class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Question
-        fields = ['id', 'quiz', 'title']
+        model = Answer
+        fields = ['id', 'question', 'answer_text', 'is_right']
 
 
 class ListAnswerSerializer(serializers.ModelSerializer):
@@ -26,12 +28,10 @@ class ListAnswerSerializer(serializers.ModelSerializer):
         fields = ['id', 'answer_text', 'is_right']
 
 
-class RandomQuestionSerializer(serializers.ModelSerializer):
-    answer = ListAnswerSerializer(many=True, read_only=True)
-    
+class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ['title', 'answer']
+        fields = ['id', 'quiz', 'title']
 
 
 class ListQuestionSerializer(serializers.ModelSerializer):
@@ -43,7 +43,9 @@ class ListQuestionSerializer(serializers.ModelSerializer):
         fields = ['id', 'quiz', 'title', 'answer']
 
 
-class AnswerSerializer(serializers.ModelSerializer):
+class RandomQuestionSerializer(serializers.ModelSerializer):
+    answer = ListAnswerSerializer(many=True, read_only=True)
+    
     class Meta:
-        model = Answer
-        fields = ['id', 'question', 'answer_text', 'is_right']
+        model = Question
+        fields = ['title', 'answer']
