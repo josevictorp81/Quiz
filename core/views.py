@@ -4,7 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
 
 from .models import Question, Quizzes, Answer, Category
-from .serializers import QuizSerializer, RandomQuestionSerializer, ListQuestionSerializer, CategorySerializer, QuestionSerializer, AnswerSerializer
+from .serializers import QuizSerializer, RandomQuestionSerializer, ListQuestionSerializer, CategorySerializer, QuestionSerializer, AnswerSerializer, ListQuizSerializer
 
 class ListCreateCategory(generics.ListCreateAPIView):
     queryset = Category.objects.all()
@@ -14,10 +14,14 @@ class ListCreateCategory(generics.ListCreateAPIView):
 
 class ListCreateQuiz(generics.ListCreateAPIView):
     queryset = Quizzes.objects.all()
-    serializer_class = QuizSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['category__name', 'title']
     permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return QuizSerializer
+        return ListQuizSerializer
 
 
 class RetrieveUpdateDestroyQuiz(generics.RetrieveUpdateDestroyAPIView):
@@ -38,9 +42,10 @@ class ListQuestion(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None, *args, **kwargs):
-        queryset = self.queryset.filter(quiz__title=kwargs['topic'])
+        queryset = self.queryset.filter(quiz__title=kwargs['quiz'])
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
+
 
 class RetrieveUpdateDestroyQuestion(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
