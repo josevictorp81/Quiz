@@ -37,7 +37,6 @@ Resposta
 ```
 /api/answer/
 /api/answer/id/ 
-
 ```
 
 Usuário
@@ -47,7 +46,7 @@ Usuário
 /api/auth/token/
 /api/auth/token/refresh/
 ```
-Para ver com mais detalhes os schemas de entrada de cada endpoint acesse `/docs/` ou `/redoc/.
+Para ver com mais detalhes os schemas de entrada de cada endpoint acesse `/docs/` ou `/redoc/`.
 
 Exemplo online [Quiz API](https://appquiz-api.herokuapp.com/).
 
