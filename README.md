@@ -33,7 +33,7 @@ Questão
 ```
 
 Resposta
-- Criar respsota, atualizar e deletar resposta pelo ID, respectivamente.
+- Criar resposta, atualizar e deletar resposta pelo ID, respectivamente.
 ```
 /api/answer/
 /api/answer/id/ 
